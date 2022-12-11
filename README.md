@@ -1,17 +1,18 @@
-**Use Deep Neural Networks for the task of semantic segmentation of microglial cells**
+# Introduction
+**Use Deep Neural Networks for the task of semantic segmentation of microglial cells**  
 The project allows the user to quickly segment microglial samples using Deep neural networks. The project is composed of 2 parts. 
-- Preprocess and predict: the raw data gets preprocessed and then fed to the neural network of choice
-- Postprocessing: the output of the prediction gets post-processed to increase the precision and remove small artefacts
+1. **Preprocess and predict:** the raw data gets preprocessed and then fed to the neural network of choice
+2. **Postprocessing:** the output of the prediction gets post-processed to increase the precision and remove small artefacts
 The only scripts the user is supposed to run are the *.ipynb* and *CleanFolders.py*. 
 
-Please note that the input data is supposed to respect a certain shape. Images are supposed to be .tiff with 4 channels, (Z, MN, H, W). 
+Please note that the input data is supposed to be images in .tiff format with 4 channels, (Z, MN, H, W). 
 - **Z**: z-planes or slices
 - **MN**: microglia/nuclei channel
 - **H**: height
 - **W**: width
 Having the data in different formats or shapes might cause errors. The automatic sanity check will help you figure out whether everything is fine.
 
-## 1) Preprocess and predict
+# 1) Preprocess and predict
 The *preprocess_and_predict.ipynb* notebook contains all you need to run for this part.
 I'll briefly cover the folders content and meaning
 
