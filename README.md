@@ -3,7 +3,8 @@
 The project allows the user to quickly segment microglial samples using Deep neural networks. The project is composed of 2 parts. 
 1. **Preprocess and predict:** the raw data gets preprocessed and then fed to the neural network of choice
 2. **Postprocessing:** the output of the prediction gets post-processed to increase the precision and remove small artefacts
-The only scripts the user is supposed to run are the *.ipynb* and *CleanFolders.py*. 
+The only scripts the user is supposed to run are the *.ipynb* and *CleanFolders.py*.   
+*CleanFolders.py* is a simple script to delete the content of all the output folders, leaving the *input_images* and *models* folders untouched. It is not mandatory, although I prefer to empty the output folder this way after each experiment in order to keep the folders clean for the next one.
 
 Please note that the input data is supposed to be images in .tiff format with 4 channels, (Z, MN, H, W). 
 - **Z**: z-planes or slices
