@@ -46,7 +46,7 @@ To post-process your prediction, simply run the *postprocess.ipynb* notebook. Th
 # Citation (BibTeX)
 If you use this software, please cite it as below.
 
-@software{Ggragnaniello_microglia_ss2022,
+@software{Ggragnaniello_microglia_ss2022,  
   author = {Gragnaniello, Gianluca and Brochier, Lorenzo},  
   month = {12},  
   title = {{Microgial semantic segmentation with Deep learning}},  
