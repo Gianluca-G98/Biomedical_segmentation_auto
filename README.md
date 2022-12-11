@@ -25,14 +25,14 @@ I'll briefly cover the folders content and meaning.
 - **verbose:** is for debugging, leave it at zero
 
 # 2) Postprocessing
-To postprocess your prediction, simply run the *postprocess.ipynb* notebook. The *config_postproc* at the beginning will allow you to choose the parameters to use. I'll briefly explain now the meaning of the included parameters.
+To post-process your prediction, simply run the *postprocess.ipynb* notebook. The *config_postproc* at the beginning will allow you to choose the parameters to use. I'll briefly explain now the meaning of the included parameters and folder. 
 
 **Parameters:**  
 - **m_area_trsh:** minimum area that a region must have in order not to be discarded
 - **m_intensity_trsh:** all regions that have an average intensity in the nuclei channel lower than this threshold are discarded
 - **round_n_trsh:** nuclei channel threshold, used to obtain the "prediction" mask of nuclei
 - **n_area_trsh:** minimum area that the "predicted" nucleus must have, for a given microglia, in order not to be discarded
-- **n_erosion:** number of times we want to apply erosion after post-processing. The higher this parameter, the more likely the cells are detached, but at the same time we worsen the morphology. The output image obtained after erosion can be thought of as a "guide" to identify the central part of the cell
+- **n_erosion:** number of times we want to apply erosion after post-processing. The higher this parameter, the more likely the cells are detached, but at the same time we worsen the morphology. The output image obtained after erosion can be thought of as a "guide" to identifying the central part of the cell
 
 **Folders:**  
 - **out_preprocessed_npy:** directory where the preprocessed data in .npy format is located
@@ -40,6 +40,8 @@ To postprocess your prediction, simply run the *postprocess.ipynb* notebook. The
 - **out_postproc:** directory where you want post-processed images to go
 - **out_postproc_npy:** directory where the post-processed images in .npy format will be placed (they are used for erosion, look at the .png)
 - **out_eroded_png:** directory where the eroded images in .png format will be placed 
+
+**IMPORTANT:** the erosion is applied separately from the rest of the postprocessing. It is only used to get a better estimate of the number of cells in the sample. The .png of the eroded images is also saved, but I suggest not using them, since the erosion ruins the morphology. However, if the input image is very noisy and the morphology predicted is not very good in the first place, it might be possible for eroded images to provide at least a better cell separation.
 
 # Citation (BibTeX)
 If you use this software, please cite it as below.
