@@ -1,0 +1,13 @@
+__pycache__/
+Alternative_Scripts_(no ipynb)/
+input_images/*.tif
+models/*.h5
+out_eroded_png/*.png
+out_postproc_png/*.png
+out_pred_png/*.png
+out_preprocessed_png/*.png
+out_eroded_npy/.*\.(np|npy)$
+out_postproc_npy/.*\.(np|npy)$
+out_pred_npy/.*\.(np|npy)$
+out_preprocessed_npy/.*\.(np|npy)$
+eroded_cell_count.txt
