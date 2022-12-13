@@ -1,3 +1,4 @@
+![Microglia banner](.github/banner.png)
 # Introduction
 **Use Deep Neural Networks for the task of semantic segmentation of microglial cells**  
 The project allows the user to quickly segment microglial samples using Deep neural networks. The project is composed of 2 parts. 
