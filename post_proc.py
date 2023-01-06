@@ -136,7 +136,7 @@ def erode_images(config):
                         eroded_img = binary_erosion(eroded_img)
                     labels_eroded = label(eroded_img)
                     for region in regionprops(labels_eroded):
-                        if region.area < 150: # setting a threshold depending from config thrsh
+                        if region.area < config['erosion_size_clean']: # setting a threshold depending from config thrsh
                             idxs.append(region.label)
                     
                     # mask of cells to be deleted
@@ -157,7 +157,7 @@ def erode_images(config):
                 elif config['n_erosion'] == 0:  # If i want to skip the erosion
                     labels_postproc = label(postproc)
                     for region in regionprops(labels_postproc):
-                        if region.area < 150: # setting a threshold depending from config thrsh
+                        if region.area < config['erosion_size_clean']: # setting a threshold depending from config thrsh
                             idxs.append(region.label)
 
                     # mask of cells to be deleted
