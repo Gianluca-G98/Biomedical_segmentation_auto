@@ -6,8 +6,8 @@ out_eroded_png/*.png
 out_postproc_png/*.png
 out_pred_png/*.png
 out_preprocessed_png/*.png
-out_eroded_npy/.*\.(np|npy)$
-out_postproc_npy/.*\.(np|npy)$
-out_pred_npy/.*\.(np|npy)$
-out_preprocessed_npy/.*\.(np|npy)$
+out_eroded_npy/*.npy
+out_postproc_npy/*.npy
+out_pred_npy/*.npy
+out_preprocessed_npy/*.npy
 eroded_cell_count.txt

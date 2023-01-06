@@ -98,7 +98,7 @@ def post_proc_save(config, verbose=0):
                 # The prediction and fluorescence dimensions must match. 
                 # Obviously fluorescence is three-dimensional so we take a slice at random
                 if y_pred.shape != fluo[:,:,0].shape:
-                    print("ATTENZIONE! Le dimensioni di prediction e fluorescenza preprocessata non combaciano.")
+                    print("ERROR! Prediction and preprocessed fluorescence dimensions do not match.")
                     print("y_pred shape: {}\nfluo shape: {}".format(y_pred.shape, fluo[:,:,0].shape))
                     raise Exception()
 
@@ -129,28 +129,56 @@ def erode_images(config):
                 
                 path = config['out_postproc_npy'] + '/' + file
                 postproc = np.load(path)
-                eroded_img = binary_erosion(postproc)
-                for i in range(config['n_erosion']-1):
-                    eroded_img = binary_erosion(eroded_img)
-                labels_eroded = label(eroded_img)
-                for region in regionprops(labels_eroded):
-                    if region.area < 150: # setting a threshold depending from config thrsh
-                        idxs.append(region.label)
-                
-                # mask of cells to be deleted
-                idxs = np.array(idxs)
-                mask = np.isin(labels_eroded, idxs)
 
-                # postprocessed labels (without cells with label in idxs)
-                labels_postproc = np.where(mask == 1, 0, labels_eroded)
-                cellcount_dict[file[:-4]] = len(np.unique(labels_postproc))
-                eroded_postproc = np.where(labels_postproc > 0, 1, 0)
+                if config['n_erosion'] > 0:
+                    eroded_img = binary_erosion(postproc)
+                    for i in range(config['n_erosion']-1):
+                        eroded_img = binary_erosion(eroded_img)
+                    labels_eroded = label(eroded_img)
+                    for region in regionprops(labels_eroded):
+                        if region.area < 150: # setting a threshold depending from config thrsh
+                            idxs.append(region.label)
+                    
+                    # mask of cells to be deleted
+                    idxs = np.array(idxs)
+                    mask = np.isin(labels_eroded, idxs)
 
-                # save image
-                plt.imsave(config['out_eroded_png']+ '/' + file[:-4] + '.png', eroded_postproc)
-                print(f'Erosion of {file[:-4]} saved successfully!! (.png)')
-                end = time.time()
-                print("ETA: ", end - start)
+                    # postprocessed labels (without cells with label in idxs)
+                    labels_postproc = np.where(mask == 1, 0, labels_eroded)
+                    cellcount_dict[file[:-4]] = len(np.unique(labels_postproc))
+                    eroded_postproc = np.where(labels_postproc > 0, 1, 0)
+
+                    # save image
+                    plt.imsave(config['out_eroded_png']+ '/' + file[:-4] + '.png', eroded_postproc)
+                    print(f'Erosion of {file[:-4]} saved successfully!! (.png)')
+                    end = time.time()
+                    print("ETA: ", end - start)
+
+                elif config['n_erosion'] == 0:  # If i want to skip the erosion
+                    labels_postproc = label(postproc)
+                    for region in regionprops(labels_postproc):
+                        if region.area < 150: # setting a threshold depending from config thrsh
+                            idxs.append(region.label)
+
+                    # mask of cells to be deleted
+                    idxs = np.array(idxs)
+                    mask = np.isin(labels_postproc, idxs)
+
+                    # postprocessed labels (without cells with label in idxs)
+                    labels_postproc = np.where(mask == 1, 0, labels_postproc)
+                    cellcount_dict[file[:-4]] = len(np.unique(labels_postproc))
+                    labels_postproc = np.where(labels_postproc > 0, 1, 0)
+
+                    plt.imsave(config['out_eroded_png']+ '/' + file[:-4] + '.png', labels_postproc)
+                    print(f'Erosion of {file[:-4]} saved successfully!! (.png)')
+                    end = time.time()
+                    print("ETA: ", end - start)
+
+                else:
+                    print("ERROR! Erosion parameter should be a positive integer. {} passed instead".format(config['n_erosion']))
+                    raise Exception()
+
+
             else:
                 continue
                  
