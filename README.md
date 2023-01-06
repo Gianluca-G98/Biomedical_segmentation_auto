@@ -36,6 +36,7 @@ To post-process your prediction, simply run the *postprocess.ipynb* notebook. Th
 - **round_n_trsh:** nuclei channel threshold, used to obtain the "prediction" mask of nuclei; round to 1 those values greater than the threshold and puts the rest to zero
 - **n_area_trsh:** minimum area that the "predicted" nucleus must have, for a given microglia, in order not to be discarded
 - **n_erosion:** number of times we want to apply erosion after post-processing. The higher this parameter, the more likely the cells will detach, but at the same time we worsen the morphology. The output image obtained after erosion can be thought of as a "guide" to identifying the central part of the cell
+- **erosion_size_clean:** the erosion procedure breaks some cellular protrusions from the core body, creating additional "junk". Those spots have to be cleaned before proceeding with cell counting, otherwise, we end up with more cells than we actually have. All the regions smaller than this will be considered junk created by the erosion and therefore erased
 
 **Folders:**  
 - **out_preprocessed_npy:** directory where the preprocessed data in .npy format is located
