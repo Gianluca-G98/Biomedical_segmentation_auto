@@ -184,6 +184,7 @@ def erode_images(config):
                  
     # Now we write the cell_count in a separate txt file
     with open("eroded_cell_count.txt", 'w') as f:
+        f.write('Erosion parameters used: n_erosion={}\t erosion_size_clean={}\n\n'.format(config['n_erosion'], config['erosion_size_clean']))
         for key, value in cellcount_dict.items():
             f.write('%s:%s\n' % (key, value))
     return cellcount_dict
